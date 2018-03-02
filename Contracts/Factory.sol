@@ -1,3 +1,5 @@
+pragma solidity 0.4.20;
+
 contract Factory is Administration {
 
 	// replace this with the compiled bytecode fro the contract you wish to produce
@@ -5,7 +7,7 @@ contract Factory is Administration {
 	bytes constant private code = hex"..";
 
 	function deployToken() external {
-		bytes memory _code = tokenCodeConst;
+		bytes memory _code = code;
 		address a;
 		assembly {
 			a := create(0, add(_code, 0x20), mload(_code))
