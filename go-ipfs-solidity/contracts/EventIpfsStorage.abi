@@ -1,0 +1,2 @@
+[{"constant":false,"inputs":[{"name":"_a","type":"string"}],"name":"EmitStringStorageEvent","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_a","type":"string"}],"name":"StringStorage","type":"event"}]
+
