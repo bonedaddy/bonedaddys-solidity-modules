@@ -5,10 +5,10 @@ pragma solidity 0.4.21;
 */
 contract EventIpfsStorage {
 
-	event StringStorage(string _a);
+	event TextData(string _a, string _b);
 
-	function EmitStringStorageEvent(string _a) public returns (bool) {
-		emit StringStorage(_a);
+	function EmitStringStorageEvent() public returns (bool) {
+		emit TextData("abc", "def");
 		return true;
 	}
 
