@@ -10,7 +10,7 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	//"github.com/ethereum/go-ethereum/common"
 	//"github.com/ethereum/go-ethereum/core/types"
-	//"github.com/ethereum/go-ethereum/event"
+	"github.com/ethereum/go-ethereum/event"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"./event_ipfs_storage"
 
@@ -29,12 +29,46 @@ func main() {
 	passwd, err := gopass.GetPasswd()
 	passwdString := string(passwd)
 	// authorize a conenction so we can deploy stuff and change states
-	auth, err = bind.NewTransactor(strings.NewReader(key), passwdString)
+	auth, err := bind.NewTransactor(strings.NewReader(key), passwdString)
 	if err != nil {
 		log.Fatalf("error unlocking account")
 	}
 
 	address, tx, eventIpfsStorage, err := event_ipfs_storage.DeployEventIpfsStorage(auth, client)
-	
+	if err != nil {
+		log.Fatalf("error deploying contract")
+	}
+	fmt.Printf("Contract Address:: 0x%x\n", address)
+	fmt.Printf("Transaction hash 0x%x\n", tx.Hash())
+	fmt.Println("Press enter to continue")
+	fmt.Scanln()
 
+	for i := 0; i < 5; i ++ {
+		_, err = eventIpfsStorage.EmitStringStorageEvent(auth)
+		if err!= nil {
+			log.Fatalf ("error emitting event")
+		}
+	}
+
+	var ch = make(chan *event_ipfs_storage.EventIpfsStorageStringStorage)
+	sub, err := eventIpfsStorage.WatchStringStorage(nil, ch)
+	if err != nil {
+		log.Fatalf("Error establishing event Subscription")
+	}
+
+	go eventParser(sub, ch)
+	fmt.Println("Press enter to continue")
+	fmt.Scanln()
+}
+
+func eventParser(sub event.Subscription, c chan *event_ipfs_storage.EventIpfsStorageStringStorage) {
+	
+	for {
+		select {
+		case err := <-sub.Err():
+			log.Fatal(err)
+		case log := <-c:
+			fmt.Printf("unpacked data %vz\n", log) 
+		}
+	}
 }

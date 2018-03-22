@@ -15,10 +15,10 @@ import (
 )
 
 // EventIpfsStorageABI is the input ABI used to generate the binding from.
-const EventIpfsStorageABI = "[{\"constant\":false,\"inputs\":[{\"name\":\"_a\",\"type\":\"string\"}],\"name\":\"EmitStringStorageEvent\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"_a\",\"type\":\"string\"}],\"name\":\"StringStorage\",\"type\":\"event\"}]"
+const EventIpfsStorageABI = "[{\"constant\":false,\"inputs\":[],\"name\":\"EmitStringStorageEvent\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"a\",\"type\":\"string\"}],\"name\":\"StringStorage\",\"type\":\"event\"}]"
 
 // EventIpfsStorageBin is the compiled bytecode used for deploying new contracts.
-const EventIpfsStorageBin = `6060604052341561000f57600080fd5b6101788061001e6000396000f3006060604052600436106100405763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166301275aba8114610045575b600080fd5b341561005057600080fd5b61009660046024813581810190830135806020601f820181900481020160405190810160405281815292919060208401838380828437509496506100aa95505050505050565b604051901515815260200160405180910390f35b60007fb0423141aed0c587f9003a92eb4f9d0010904d615b925e36b6c35e4f96517c5d8260405160208082528190810183818151815260200191508051906020019080838360005b8381101561010a5780820151838201526020016100f2565b50505050905090810190601f1680156101375780820380516001836020036101000a031916815260200191505b509250505060405180910390a15060019190505600a165627a7a72305820037dfda1b09fb2148ce97cee1bdd65b4724f75369e4bbaf874ba3f7e38b888b70029`
+const EventIpfsStorageBin = `60606040523415600e57600080fd5b6101008061001d6000396000f300606060405260043610603e5763ffffffff7c0100000000000000000000000000000000000000000000000000000000600035041663e2bdf18681146043575b600080fd5b3415604d57600080fd5b60536067565b604051901515815260200160405180910390f35b60007fb0423141aed0c587f9003a92eb4f9d0010904d615b925e36b6c35e4f96517c5d60405160208082526001908201527f61000000000000000000000000000000000000000000000000000000000000006040808301919091526060909101905180910390a1506001905600a165627a7a72305820714c49bc44932b5ff841378b59abc6d542fe5302be13977d78b7221d4d2e9c7e0029`
 
 // DeployEventIpfsStorage deploys a new Ethereum contract, binding an instance of EventIpfsStorage to it.
 func DeployEventIpfsStorage(auth *bind.TransactOpts, backend bind.ContractBackend) (common.Address, *types.Transaction, *EventIpfsStorage, error) {
@@ -175,25 +175,25 @@ func (_EventIpfsStorage *EventIpfsStorageTransactorRaw) Transact(opts *bind.Tran
 	return _EventIpfsStorage.Contract.contract.Transact(opts, method, params...)
 }
 
-// EmitStringStorageEvent is a paid mutator transaction binding the contract method 0x01275aba.
+// EmitStringStorageEvent is a paid mutator transaction binding the contract method 0xe2bdf186.
 //
-// Solidity: function EmitStringStorageEvent(_a string) returns(bool)
-func (_EventIpfsStorage *EventIpfsStorageTransactor) EmitStringStorageEvent(opts *bind.TransactOpts, _a string) (*types.Transaction, error) {
-	return _EventIpfsStorage.contract.Transact(opts, "EmitStringStorageEvent", _a)
+// Solidity: function EmitStringStorageEvent() returns(bool)
+func (_EventIpfsStorage *EventIpfsStorageTransactor) EmitStringStorageEvent(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _EventIpfsStorage.contract.Transact(opts, "EmitStringStorageEvent")
 }
 
-// EmitStringStorageEvent is a paid mutator transaction binding the contract method 0x01275aba.
+// EmitStringStorageEvent is a paid mutator transaction binding the contract method 0xe2bdf186.
 //
-// Solidity: function EmitStringStorageEvent(_a string) returns(bool)
-func (_EventIpfsStorage *EventIpfsStorageSession) EmitStringStorageEvent(_a string) (*types.Transaction, error) {
-	return _EventIpfsStorage.Contract.EmitStringStorageEvent(&_EventIpfsStorage.TransactOpts, _a)
+// Solidity: function EmitStringStorageEvent() returns(bool)
+func (_EventIpfsStorage *EventIpfsStorageSession) EmitStringStorageEvent() (*types.Transaction, error) {
+	return _EventIpfsStorage.Contract.EmitStringStorageEvent(&_EventIpfsStorage.TransactOpts)
 }
 
-// EmitStringStorageEvent is a paid mutator transaction binding the contract method 0x01275aba.
+// EmitStringStorageEvent is a paid mutator transaction binding the contract method 0xe2bdf186.
 //
-// Solidity: function EmitStringStorageEvent(_a string) returns(bool)
-func (_EventIpfsStorage *EventIpfsStorageTransactorSession) EmitStringStorageEvent(_a string) (*types.Transaction, error) {
-	return _EventIpfsStorage.Contract.EmitStringStorageEvent(&_EventIpfsStorage.TransactOpts, _a)
+// Solidity: function EmitStringStorageEvent() returns(bool)
+func (_EventIpfsStorage *EventIpfsStorageTransactorSession) EmitStringStorageEvent() (*types.Transaction, error) {
+	return _EventIpfsStorage.Contract.EmitStringStorageEvent(&_EventIpfsStorage.TransactOpts)
 }
 
 // EventIpfsStorageStringStorageIterator is returned from FilterStringStorage and is used to iterate over the raw logs and unpacked data for StringStorage events raised by the EventIpfsStorage contract.
@@ -271,7 +271,7 @@ type EventIpfsStorageStringStorage struct {
 
 // FilterStringStorage is a free log retrieval operation binding the contract event 0xb0423141aed0c587f9003a92eb4f9d0010904d615b925e36b6c35e4f96517c5d.
 //
-// Solidity: event StringStorage(_a string)
+// Solidity: event StringStorage(a string)
 func (_EventIpfsStorage *EventIpfsStorageFilterer) FilterStringStorage(opts *bind.FilterOpts) (*EventIpfsStorageStringStorageIterator, error) {
 
 	logs, sub, err := _EventIpfsStorage.contract.FilterLogs(opts, "StringStorage")
@@ -283,7 +283,7 @@ func (_EventIpfsStorage *EventIpfsStorageFilterer) FilterStringStorage(opts *bin
 
 // WatchStringStorage is a free log subscription operation binding the contract event 0xb0423141aed0c587f9003a92eb4f9d0010904d615b925e36b6c35e4f96517c5d.
 //
-// Solidity: event StringStorage(_a string)
+// Solidity: event StringStorage(a string)
 func (_EventIpfsStorage *EventIpfsStorageFilterer) WatchStringStorage(opts *bind.WatchOpts, sink chan<- *EventIpfsStorageStringStorage) (event.Subscription, error) {
 
 	logs, sub, err := _EventIpfsStorage.contract.WatchLogs(opts, "StringStorage")
