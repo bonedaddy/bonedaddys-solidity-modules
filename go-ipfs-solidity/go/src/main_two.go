@@ -6,6 +6,7 @@ import (
 	"log"
 	//"context"
 	"strings"
+	"io"
 
 	ipfs_api "github.com/ipfs/go-ipfs-api"
 
@@ -26,25 +27,26 @@ func establishIpfsConnection(url string) *ipfs_api.Shell {
 	return ipfs_api.NewShell(url)
 }
 
+func genReader(contents string) io.Reader {
+	r := strings.NewReader(contents)
+	lr := io.LimitReader(r, int64(len(contents)))
+	return lr	
+}
 
 func main() {
 
 	ipfs := establishIpfsConnection("localhost:5001")
-	id, err := ipfs.ID()
-	if err != nil {
-		log.Fatal("error retrieving IPFS peer identity information", err)
-	} else {
-		fmt.Println("ipfs peer information", id)
-	}
+	
+	lr := genReader("some random contents")
 
-	response, err := ipfs.AddDir("/tmp/test")
+	response, err := ipfs.Add(lr)
 	if err != nil {
 		log.Fatal("error adding directory to IPFS", err)
 	} else {
 		fmt.Println("ipfs response")
 		fmt.Println(response)
 	}
-
+	fmt.Scanln()
 	fmt.Println("initiating ipc connection")
 	client, err := ethclient.Dial("/home/solidity/.ethereum/geth.ipc")
 	if err != nil {
@@ -83,8 +85,17 @@ func main() {
 		select {
 		case err := <-sub.Err():
 			log.Fatal("error parsing event", err)
-		case log := <-ch:
-			fmt.Println("log", log)
+		case evLog := <-ch:
+			name, contents := evLog.Name, evLog.Contents
+			formatted := fmt.Sprintf("%s\n%s\n", name, contents)
+			lr := genReader(formatted)
+			response, err := ipfs.Add(lr)
+			if err != nil {
+				log.Fatal("error adding file to ipfs", err)
+			} else {
+				fmt.Println("ipfs response")
+				fmt.Println(response)
+			}
 		}
 	}
 
