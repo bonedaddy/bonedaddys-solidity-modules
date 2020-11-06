@@ -9,8 +9,10 @@ contract Administration {
 
     mapping (address => bool) public moderators;
 
-    event AdminSet(address indexed _admin, bool indexed _adminSet);
-    event OwnershipTransferred(address indexed _previousOwner, address indexed _newOwner, bool indexed _ownershipTransferred);
+    event AdminSet(address _admin);
+    event ModeratorSet(address _moderator);
+    event ModeratorUnset(address _moderator);
+    event OwnershipTransferred(address _previousOwner, address _newOwner);
 
     modifier onlyOwner() {
         require(msg.sender == owner);
@@ -41,7 +43,32 @@ contract Administration {
     {
         require(_newAdmin != admin);
         admin = _newAdmin;
-        emit AdminSet(_newAdmin, true);
+        emit AdminSet(_newAdmin);
+        return true;
+    }
+
+    function setModerator(
+        address _moderator
+    )
+        public
+        onlyAdmin
+        returns (bool)
+    {
+        moderators[_moderator] = true;
+        emit ModeratorSet(_moderator);
+        return true;
+    }
+
+    function unsetModerator(
+        address _moderator
+    )
+        public
+        onlyAdmin
+        returns (bool)
+    {
+        delete moderators[_moderator];
+        emit ModeratorUnset(_moderator);
+        return true;
     }
 
     function transferOwnership(
@@ -51,8 +78,9 @@ contract Administration {
         onlyOwner
         returns (bool)
     {
-        require(_newOwner != owner);
+        require(_newOwner != owner && _newOwner != address(0));
         owner = _newOwner;
-        emit OwnershipTransferred(msg.sender, _newOwner, true);
+        emit OwnershipTransferred(msg.sender, _newOwner);
+        return true;
     }
 }
