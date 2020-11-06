@@ -1,2 +1,0 @@
-[{"constant":false,"inputs":[{"name":"_name","type":"string"},{"name":"_contents","type":"string"}],"name":"StoreTextData","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_name","type":"string"},{"indexed":false,"name":"_contents","type":"string"}],"name":"TextData","type":"event"}]
-
