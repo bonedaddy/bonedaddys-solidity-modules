@@ -1,0 +1,31 @@
+{
+  "kind": "user",
+  "methods":
+  {
+    "expireErcChannel(bytes32,address)":
+    {
+      "notice": "Used to withdraw whatever funds are remaining in the channel, so long as the channel is opened"
+    },
+    "openErcChannel(address,address,uint256,uint256)":
+    {
+      "notice": "start of ERC20 channel functions "
+    },
+    "openEthChannel(address,uint256,uint256)":
+    {
+      "notice": "start of eth channel functions "
+    },
+    "submitErcDestinationProof(bytes32,uint8,bytes32,bytes32,bytes32)":
+    {
+      "notice": "Need to add a require function to check for sign messaged hash use"
+    },
+    "submitErcSourceProof(bytes32,uint8,bytes32,bytes32,bytes32)":
+    {
+      "notice": "Need to add a require function to ensure the signed message hash hasn't already been submitted"
+    },
+    "withdrawEth()":
+    {
+      "notice": "withdraw any ether in the contract, only when in developer mode"
+    }
+  },
+  "version": 1
+}

@@ -1,0 +1,6 @@
+{
+  "details": "This contract is specifically for handling contract deployments through inline assembly",
+  "kind": "dev",
+  "methods": {},
+  "version": 1
+}

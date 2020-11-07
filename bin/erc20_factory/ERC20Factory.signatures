@@ -1,0 +1,4 @@
+22123ef7: deployToken(address,uint256,uint8,string,string)
+3cd6ee6d: deployToken(bytes)
+0712b9d0: generatedTokens(uint256)
+e4860339: tokens(address)

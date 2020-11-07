@@ -1,0 +1,8 @@
+f851a440: admin()
+054f7d9c: frozen()
+14d0f1ba: moderators(address)
+8da5cb5b: owner()
+704b6c02: setAdmin(address)
+75bba189: setModerator(address)
+f2fde38b: transferOwnership(address)
+ed15652f: unsetModerator(address)

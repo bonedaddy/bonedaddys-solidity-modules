@@ -1,8 +1,8 @@
 pragma solidity >=0.4.24 <=0.8.0;
 
-import "../utils/Bytes.sol";
-import "../interfaces/ERC20I.sol";
-import "../factory/RuntimeFactory.sol";
+import "./utils/Bytes.sol";
+import "./interfaces/ERC20I.sol";
+import "./RuntimeFactory.sol";
 
 contract ERC20Factory is ByteUtils, RuntimeFactory {
 

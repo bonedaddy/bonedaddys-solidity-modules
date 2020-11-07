@@ -1,8 +1,8 @@
-pragma solidity 0.7.0;
+pragma solidity >=0.4.24 <=0.8.0;
 
-import "../utils/Administration.sol";
-import "../math/SafeMath.sol";
-import "../interfaces/ERC20I.sol";
+import "./ownership/Administration.sol";
+import "./math/SafeMath.sol";
+import "./interfaces/ERC20I.sol";
 
 contract PaymentChannels is Administration {
 	
